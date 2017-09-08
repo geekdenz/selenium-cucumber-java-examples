@@ -4,58 +4,61 @@ apply plugin: 'base'
 
 // In this section you declare where to find the dependencies of your project
 repositories {
-    // Use 'jcenter' for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
-	mavenLocal()
+	// Use 'jcenter' for resolving your dependencies.
+	// You can declare any Maven/Ivy/file repository here.
+	jcenter()
+	//mavenLocal()
 	maven { url 'https://jitpack.io' }
 }
 
 def seleniumVersion = "3.5.3"
 def cucumberVersion = "1.2.5"
+def seleniumCucumberVersion = "0.1.8"
+def groupId = "com.github.geekdenz"
+//def groupId = "selenium-cucumber"
 // In this section you declare the dependencies for your production and test code
 dependencies {
-    // The production code uses the SLF4J logging API at compile time
-    //compile 'org.slf4j:slf4j-api:1.7.25'
+	// The production code uses the SLF4J logging API at compile time
+	//compile 'org.slf4j:slf4j-api:1.7.25'
 
-    //compile 'junit:junit:4.12'
-    //compile "com.google.inject:guice:3.0"
-    //compile "info.cukes:cucumber-java:${cucumberVersion}"
-    //compile "info.cukes:cucumber-guice:${cucumberVersion}"
-    //compile "info.cukes:cucumber-junit:${cucumberVersion}"
+	//compile 'junit:junit:4.12'
+	//compile "com.google.inject:guice:3.0"
+	//compile "info.cukes:cucumber-java:${cucumberVersion}"
+	//compile "info.cukes:cucumber-guice:${cucumberVersion}"
+	//compile "info.cukes:cucumber-junit:${cucumberVersion}"
 	//compile "info.cukes:cucumber-picocontainer:${cucumberVersion}"
-    //compile "org.seleniumhq.selenium:selenium-java:${seleniumVersion}"
-    //compile "org.seleniumhq.selenium:selenium-server:${seleniumVersion}"
-    //compile "org.seleniumhq.selenium:selenium-api:${seleniumVersion}"
+	//compile "org.seleniumhq.selenium:selenium-java:${seleniumVersion}"
+	//compile "org.seleniumhq.selenium:selenium-server:${seleniumVersion}"
+	//compile "org.seleniumhq.selenium:selenium-api:${seleniumVersion}"
 	//compile 'com.github.geekdenz:selenium-cucumber-java:v0.1.2'
 
-    // Declare the dependency for your favourite test framework you want to use in your tests.
-    // TestNG is also supported by the Gradle Test task. Just change the
-    // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
-    // 'test.useTestNG()' to your build script.
-    testCompile 'junit:junit:4.12'
-    testCompile "com.google.inject:guice:3.0"
-    testCompile "info.cukes:cucumber-java:${cucumberVersion}"
-    testCompile "info.cukes:cucumber-guice:${cucumberVersion}"
-    testCompile "info.cukes:cucumber-junit:${cucumberVersion}"
+	// Declare the dependency for your favourite test framework you want to use in your tests.
+	// TestNG is also supported by the Gradle Test task. Just change the
+	// testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
+	// 'test.useTestNG()' to your build script.
+	testCompile 'junit:junit:4.12'
+	testCompile "com.google.inject:guice:3.0"
+	testCompile "info.cukes:cucumber-java:${cucumberVersion}"
+	testCompile "info.cukes:cucumber-guice:${cucumberVersion}"
+	testCompile "info.cukes:cucumber-junit:${cucumberVersion}"
 	testCompile "info.cukes:cucumber-picocontainer:${cucumberVersion}"
-    testCompile "org.seleniumhq.selenium:selenium-java:${seleniumVersion}"
-    testCompile "org.seleniumhq.selenium:selenium-server:${seleniumVersion}"
-    testCompile "org.seleniumhq.selenium:selenium-api:${seleniumVersion}"
-	testCompile 'com.github.geekdenz:selenium-cucumber-java:0.1.7'
+	testCompile "org.seleniumhq.selenium:selenium-java:${seleniumVersion}"
+	testCompile "org.seleniumhq.selenium:selenium-server:${seleniumVersion}"
+	testCompile "org.seleniumhq.selenium:selenium-api:${seleniumVersion}"
+	testCompile "${groupId}:selenium-cucumber-java:${seleniumCucumberVersion}"
 }
 
 test {
-    jvmArgs "-Xmx512m", "-XX:MaxPermSize=128m", "-Dtest.env=test" //, "-Dcucumber.options=src/test/resources/nz/landcare/portals2/SiteLoads.feature" //"-Dwebdriver=phantomjs",
-    include "**"
+	jvmArgs "-Xmx512m", "-XX:MaxPermSize=128m", "-Dtest.env=test" //, "-Dcucumber.options=src/test/resources/nz/landcare/portals2/SiteLoads.feature" //"-Dwebdriver=phantomjs",
+	include "**"
 
-    testLogging {
-        exceptionFormat "full"
-        events "started", "passed", "skipped", "failed", "standardOut", "standardError"
-        stackTraceFilters 'groovy', 'entry_point', 'truncate'
-        showStandardStreams = true
-    }
+	testLogging {
+		exceptionFormat "full"
+		events "started", "passed", "skipped", "failed", "standardOut", "standardError"
+		stackTraceFilters 'groovy', 'entry_point', 'truncate'
+		showStandardStreams = true
+	}
 	options {
-        systemProperties(System.getProperties())
-    }
+		systemProperties(System.getProperties())
+	}
 }
